@@ -26,9 +26,10 @@ class MemoryMatrix extends Component {
     const shuffledArray = myArray.sort(() => Math.random() - 0.5)
     const slicedArray = shuffledArray.slice(0, 3)
     console.log(slicedArray)
-    this.setState({highlightedIndices: slicedArray}, () => {
-      setTimeout(() => {}, 3000)
-    })
+
+    setTimeout(() => {
+      this.setState({highlightedIndices: slicedArray})
+    }, 3000)
 
     console.log('New grid buttons:', slicedArray)
   }
@@ -84,8 +85,12 @@ class MemoryMatrix extends Component {
               key={index}
               type="button"
               className={`button ${
-                highlightedIndices.includes(index + 1) ? 'highlight' : ''
-              } ${clickedIndex === index ? 'clicked' : ''}`}
+                highlightedIndices.includes(index + 1)
+                  ? 'highlight'
+                  : clickedIndex === index
+                  ? 'clicked'
+                  : ''
+              } `}
               onClick={() => this.onClickCell(index)}
             >
               {_}
